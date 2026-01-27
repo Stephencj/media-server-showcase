@@ -12,7 +12,7 @@
             color: #eee;
             min-height: 100vh;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: var(--container-padding-desktop, 20px); }
         h1 { color: #1e88e5; margin-bottom: 30px; }
         h2 { color: #90caf9; margin: 20px 0 15px; font-size: 1.2rem; }
 
@@ -20,7 +20,15 @@
         #auth-section { max-width: 400px; margin: 100px auto; }
         #auth-section h1 { text-align: center; }
         .tabs { display: flex; margin-bottom: 20px; }
-        .tab { flex: 1; padding: 12px; background: #16213e; border: none; color: #888; cursor: pointer; }
+        .tab {
+            flex: 1;
+            padding: 14px 12px; /* Increased for touch targets */
+            background: #16213e;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            min-height: 44px; /* Touch target minimum */
+        }
         .tab.active { background: #1e88e5; color: white; }
         .tab:first-child { border-radius: 8px 0 0 8px; }
         .tab:last-child { border-radius: 0 8px 8px 0; }
@@ -29,14 +37,14 @@
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; color: #90caf9; font-size: 0.9rem; }
         input, select {
-            width: 100%; padding: 12px; border: 1px solid #333;
-            border-radius: 8px; background: #16213e; color: #eee; font-size: 1rem;
+            width: 100%; padding: 14px 12px; border: 1px solid #333;
+            border-radius: 8px; background: #16213e; color: #eee; font-size: 16px; /* 16px prevents iOS zoom */
         }
         input:focus, select:focus { outline: none; border-color: #1e88e5; }
         button {
             padding: 12px 24px; border: none; border-radius: 8px;
             background: #1e88e5; color: white; font-size: 1rem; cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s; min-height: 44px;
         }
         button:hover { background: #1565c0; }
         button:disabled { background: #444; cursor: not-allowed; }
@@ -44,7 +52,7 @@
         .btn-secondary:hover { background: #455a64; }
         .btn-danger { background: #c62828; }
         .btn-danger:hover { background: #b71c1c; }
-        .btn-sm { padding: 8px 16px; font-size: 0.9rem; }
+        .btn-sm { padding: 14px 16px; font-size: 0.9rem; min-height: 44px; } /* Updated for 44px touch target */
 
         /* Cards */
         .card {
@@ -167,7 +175,10 @@
         }
         .dropdown-menu.active { display: block; }
         .dropdown-item {
-            padding: 10px 16px; cursor: pointer; transition: background 0.2s;
+            padding: 14px 16px; /* Increased from 10px for touch targets */
+            cursor: pointer;
+            transition: background 0.2s;
+            min-height: 44px; /* Touch target minimum */
         }
         .dropdown-item:hover { background: #252542; }
         .dropdown-divider { height: 1px; background: #333; margin: 8px 0; }
@@ -229,7 +240,15 @@
             position: absolute; top: 0; left: 0; right: 0; z-index: 10;
         }
         .player-title { font-size: 1.2rem; font-weight: 600; }
-        .player-close { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .player-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            min-width: 44px; /* Touch target minimum */
+            min-height: 44px; /* Touch target minimum */
+        }
         .player-video { flex: 1; width: 100%; background: #000; }
         .up-next {
             position: absolute; bottom: 80px; right: 20px;
@@ -261,7 +280,7 @@
             margin-right: auto;
         }
         .nav-tab {
-            padding: 12px 24px;
+            padding: 14px 24px; /* Increased for touch targets */
             background: transparent;
             border: none;
             color: #888;
@@ -269,6 +288,7 @@
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: color 0.2s, border-color 0.2s;
+            min-height: 44px; /* Touch target minimum */
         }
         .nav-tab.active { color: #1e88e5; border-bottom-color: #1e88e5; }
         .nav-tab:hover { color: #eee; }
@@ -281,7 +301,7 @@
         .wide-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--container-padding-desktop, 20px);
         }
 
         /* Section titles */
@@ -456,8 +476,10 @@
             background: rgba(0,0,0,0.6);
             border: none;
             color: white;
-            width: 40px;
-            height: 40px;
+            min-width: 44px; /* Touch target minimum */
+            min-height: 44px; /* Touch target minimum */
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             font-size: 24px;
             cursor: pointer;
@@ -540,6 +562,7 @@
         .btn-load-more {
             padding: 12px 40px;
             background: #37474f;
+            min-height: 44px;
         }
 
         /* Empty state */
@@ -562,13 +585,14 @@
             flex-wrap: wrap;
         }
         .season-btn {
-            padding: 8px 16px;
+            padding: 12px 18px; /* Increased from 8px for touch targets */
             background: #1a1a2e;
             border: 1px solid #333;
             color: #888;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s;
+            min-height: 44px; /* Touch target minimum */
         }
         .season-btn.active, .season-btn:hover {
             background: #1e88e5;
@@ -590,8 +614,10 @@
         }
         .episode-item:hover { background: #1a1a2e; }
         .episode-number {
-            width: 40px;
-            height: 40px;
+            min-width: 44px; /* Touch target minimum */
+            min-height: 44px; /* Touch target minimum */
+            width: 44px;
+            height: 44px;
             background: #333;
             border-radius: 8px;
             display: flex;
@@ -611,12 +637,12 @@
         .search-input {
             width: 100%;
             max-width: 400px;
-            padding: 12px 16px;
+            padding: 14px 16px; /* Increased for touch targets */
             border: 1px solid #333;
             border-radius: 25px;
             background: #1a1a2e;
             color: #eee;
-            font-size: 1rem;
+            font-size: 16px; /* 16px prevents iOS zoom */
         }
         .search-input:focus {
             outline: none;
@@ -638,7 +664,7 @@
             flex: 1;
         }
         .filter-chip {
-            padding: 6px 14px;
+            padding: 12px 14px; /* Increased from 6px for touch targets */
             background: #1a1a2e;
             border: 1px solid #333;
             border-radius: 20px;
@@ -647,6 +673,7 @@
             font-size: 0.85rem;
             transition: all 0.2s;
             white-space: nowrap;
+            min-height: 44px; /* Touch target minimum */
         }
         .filter-chip:hover {
             background: #252542;
@@ -662,13 +689,14 @@
             margin-right: 4px;
         }
         .sort-select {
-            padding: 8px 12px;
+            padding: 14px 12px;
             background: #1a1a2e;
             border: 1px solid #333;
             border-radius: 6px;
             color: #eee;
             cursor: pointer;
             font-size: 0.85rem;
+            min-height: 44px;
         }
         .sort-select:focus {
             outline: none;
@@ -714,9 +742,970 @@
         .extra-item:hover {
             background: #2a2a2a;
         }
+
+        /* ========================================
+           PHASE 1: MOBILE-FIRST RESPONSIVE DESIGN
+           Core Mobile Responsiveness
+           ======================================== */
+
+        /* CSS Custom Properties for Responsive Spacing - Mobile First */
+        :root {
+            /* Base mobile values (320px+) */
+            --container-padding: 12px;
+            --grid-gap: 10px;
+            --text-base: 14px;
+            --touch-target-min: 44px;
+            /* Legacy variables for compatibility */
+            --container-padding-mobile: 12px;
+            --container-padding-tablet: 20px;
+            --container-padding-desktop: 24px;
+        }
+
+        /* Mobile-Specific Utilities */
+        .mobile-only { display: block; }
+        .desktop-only { display: none; }
+
+        /* Update breakpoint values at different screen sizes */
+        @media (min-width: 768px) {
+            :root {
+                --container-padding: 20px;
+                --grid-gap: 16px;
+                --text-base: 16px;
+            }
+            /* Show/hide utilities */
+            .mobile-only { display: none; }
+            .desktop-only { display: block; }
+        }
+
+        /* Safe Area Insets for notched devices */
+        body {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        /* Horizontal Scroll Optimizations for all devices */
+        .horizontal-scroll {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 767px) {
+            /* Navigation Tabs - Enhanced horizontal scrolling with snap */
+            .nav-tabs {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 0 12px 12px;
+            }
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+            .nav-tab {
+                scroll-snap-align: start;
+                padding: 8px 20px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            /* Container Padding using CSS variables */
+            .container {
+                padding: var(--container-padding-mobile);
+            }
+            .wide-container {
+                padding: 0 var(--container-padding-mobile);
+            }
+
+            /* Continue Watching Cards - Reduced width */
+            .continue-card {
+                width: 240px;
+                min-width: 240px;
+            }
+            .continue-backdrop {
+                height: 135px;
+            }
+
+            /* TV Show Season/Episode Layout - Better touch targets */
+            .season-selector {
+                gap: 8px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .season-selector::-webkit-scrollbar {
+                display: none;
+            }
+            .season-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                flex-shrink: 0;
+            }
+            .episodes-list {
+                max-height: 350px;
+            }
+            .episode-number {
+                min-width: 44px;
+                min-height: 44px;
+                width: 44px;
+                height: 44px;
+                font-size: 0.9rem;
+            }
+            .episode-item {
+                padding: 12px 8px;
+            }
+            .episode-title {
+                font-size: 0.9rem;
+            }
+
+            /* Section Cards - Stack header content */
+            .section-card {
+                padding: 16px;
+            }
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .card-header > div {
+                width: 100%;
+                display: flex;
+                gap: 8px;
+            }
+            .card-header button {
+                flex: 1;
+            }
+
+            /* Section Management - Full width buttons */
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .section-header button {
+                width: 100%;
+            }
+
+            /* General Modal Fixes - All Modals Full-Screen on Mobile */
+            .modal {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+                padding: 16px;
+                overflow-y: auto;
+            }
+
+            .modal-overlay {
+                align-items: flex-start;
+            }
+
+            /* Media Detail Modal - Mobile Optimizations */
+            .media-detail-modal .modal {
+                padding: 0;
+            }
+
+            .detail-backdrop {
+                height: 250px;
+            }
+
+            .detail-content {
+                flex-direction: column;
+                align-items: center;
+                padding: 0 16px 16px;
+                margin-top: -80px;
+                gap: 20px;
+            }
+
+            .detail-poster {
+                width: 140px;
+            }
+
+            .detail-info {
+                text-align: center;
+                width: 100%;
+            }
+
+            .detail-title {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .detail-meta,
+            .detail-rating,
+            .detail-genres {
+                text-align: center;
+            }
+
+            .detail-overview {
+                text-align: left;
+                max-height: 200px;
+            }
+
+            .detail-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .detail-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .detail-close {
+                width: 44px;
+                height: 44px;
+                font-size: 28px;
+                background: rgba(0, 0, 0, 0.8);
+                top: 10px;
+                right: 10px;
+            }
+
+            /* Playlist Detail Modal - Mobile */
+            #playlist-detail-modal .modal {
+                max-width: 100% !important;
+            }
+
+            #playlist-detail-modal .card-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            #playlist-detail-modal .playlist-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 8px;
+            }
+
+            #playlist-detail-modal .playlist-actions button {
+                width: 100%;
+            }
+
+            #playlist-items-list {
+                max-height: 60vh !important;
+            }
+
+            /* Section Modal - Mobile */
+            #section-modal .modal {
+                max-width: 100% !important;
+            }
+
+            #section-modal .form-group small {
+                font-size: 0.9rem;
+            }
+
+            #section-modal .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #section-modal .modal-actions button {
+                width: 100%;
+            }
+
+            /* Add to Playlist Modal - Mobile */
+            #add-to-playlist-modal .modal {
+                max-width: 100% !important;
+            }
+
+            #add-to-playlist-list {
+                max-height: 50vh !important;
+            }
+
+            /* Playlist Modal - Mobile */
+            #playlist-modal .modal {
+                max-width: 100% !important;
+            }
+
+            #playlist-modal .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #playlist-modal .modal-actions button {
+                width: 100%;
+            }
+
+            /* Auth Section - Bottom Sheet Style on Mobile */
+            #auth-section {
+                margin: 0;
+                max-width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #16213e;
+                padding: 20px;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Responsive Text Sizes */
+            .source-meta,
+            .playlist-item-duration {
+                font-size: 0.85rem;
+            }
+
+            .source-path,
+            .playlist-item-meta,
+            .media-card-year {
+                font-size: 0.9rem;
+            }
+
+            .stat-label,
+            .playlist-meta {
+                font-size: 0.9rem;
+            }
+
+            label {
+                font-size: 0.95rem;
+            }
+
+            /* Modal Actions - Stack on Mobile */
+            .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .modal-actions button {
+                width: 100%;
+            }
+
+            /* Ensure scrollable content */
+            .modal {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Container padding */
+            .container {
+                padding: 15px;
+            }
+
+            /* Cards */
+            .card {
+                padding: 15px;
+            }
+
+            /* Media Grid - Adjust for mobile */
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 10px;
+            }
+
+            /* Continue Watching Cards */
+            .continue-card {
+                min-width: 200px;
+            }
+
+            /* Toast positioning */
+            .toast {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                font-size: 0.9rem;
+            }
+
+            /* Header adjustments */
+            header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            header h1 {
+                text-align: center;
+            }
+
+            .user-info {
+                justify-content: center;
+            }
+        }
+
+        /* Extra Small Mobile Adjustments */
+        @media (max-width: 540px) {
+            .detail-title {
+                font-size: 1.3rem;
+            }
+
+            .btn-play-large {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 8px;
+            }
+
+            .continue-card {
+                min-width: 180px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 12px;
+            }
+
+            /* Playlist item rows - smaller on very small screens */
+            .playlist-item-poster {
+                width: 50px;
+                height: 75px;
+            }
+
+            .playlist-item-title {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Tablet Styles (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container {
+                padding: var(--container-padding-tablet);
+            }
+            .wide-container {
+                padding: 0 var(--container-padding-tablet);
+            }
+
+            /* Media Grid - Medium cards on tablet */
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 16px;
+            }
+
+            /* Continue Watching */
+            .continue-card {
+                width: 260px;
+            }
+
+            /* Navigation Tabs */
+            .nav-tabs {
+                padding: 0 var(--container-padding-tablet) 15px;
+            }
+        }
+
+        /* Desktop Styles (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            .container {
+                padding: var(--container-padding-desktop);
+            }
+            .wide-container {
+                padding: 0 var(--container-padding-desktop);
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            /* Larger touch targets */
+            button {
+                min-height: 44px;
+            }
+            .nav-tab {
+                min-height: 44px;
+            }
+            .filter-chip {
+                min-height: 36px;
+                padding: 8px 16px;
+            }
+            .season-btn {
+                min-height: 40px;
+            }
+            .episode-number {
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            /* Remove hover effects on touch devices */
+            .media-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            .continue-card:hover {
+                transform: none;
+            }
+            .media-card-overlay {
+                opacity: 1;
+            }
+        }
+
+        /* Very Small Screens (max-width: 374px) */
+        @media (max-width: 374px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+
+            .continue-card {
+                width: 200px;
+                min-width: 200px;
+            }
+
+            .detail-poster {
+                width: 120px;
+            }
+
+            .btn-sm {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-tab {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape Mobile (max-height: 500px and orientation: landscape) */
+        @media (max-height: 500px) and (orientation: landscape) {
+            header {
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+
+            .nav-tabs {
+                padding: 0 12px 8px;
+                margin-bottom: 15px;
+            }
+
+            .modal {
+                max-height: 95vh;
+            }
+
+            .detail-backdrop {
+                height: 200px;
+            }
+
+            .episodes-list {
+                max-height: 200px;
+            }
+        }
+
+        /* Bottom Navigation (Mobile Only) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #16213e;
+            border-top: 1px solid #333;
+            display: none; /* Hidden on desktop */
+            justify-content: space-around;
+            padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            padding: 8px;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: color 0.2s;
+            cursor: pointer;
+            min-height: 56px;
+        }
+
+        .bottom-nav-item.active {
+            color: #1e88e5;
+        }
+
+        .bottom-nav-item:active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .bottom-nav-icon {
+            font-size: 1.5rem;
+        }
+
+        .bottom-nav-label {
+            white-space: nowrap;
+        }
+
+        /* Drawer Components */
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            align-items: flex-end;
+        }
+
+        .drawer.active {
+            display: flex;
+        }
+
+        .drawer-content {
+            background: #16213e;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .drawer.active .drawer-content {
+            transform: translateY(0);
+        }
+
+        .drawer-handle {
+            width: 40px;
+            height: 4px;
+            background: #555;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px;
+            border-bottom: 1px solid #333;
+            color: #eee;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+            min-height: 56px;
+        }
+
+        .drawer-item:last-child {
+            border-bottom: none;
+        }
+
+        .drawer-item:active {
+            background: #1a1a2e;
+        }
+
+        .drawer-icon {
+            font-size: 1.5rem;
+            width: 32px;
+            text-align: center;
+        }
+
+        /* Mobile: Show bottom nav, hide top nav */
+        @media (max-width: 767px) {
+            .bottom-nav {
+                display: flex;
+            }
+
+            .nav-tabs {
+                display: none !important;
+            }
+
+            /* Add padding to body to prevent content from hiding behind bottom nav */
+            body {
+                padding-bottom: calc(70px + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* Desktop: Hide bottom nav, show top nav */
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none !important;
+            }
+
+            .nav-tabs {
+                display: flex !important;
+            }
+
+            .drawer {
+                display: none !important; /* No drawers on desktop */
+            }
+        }
+
+        /* Pull to Refresh */
+        .pull-refresh-indicator {
+            position: fixed;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: top 0.3s;
+            z-index: 100;
+            color: #1e88e5;
+            font-size: 0.9rem;
+        }
+
+        .pull-refresh-indicator.pulling {
+            top: 20px;
+        }
+
+        .pull-refresh-indicator.refreshing {
+            top: 20px;
+        }
+
+        .pull-refresh-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #333;
+            border-top-color: #1e88e5;
+            border-radius: 50%;
+        }
+
+        .pull-refresh-indicator.refreshing .pull-refresh-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Video Gesture Indicators */
+        .skip-indicator,
+        .volume-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 4000;
+        }
+
+        .player-header,
+        .up-next {
+            transition: opacity 0.3s;
+        }
+
+        /* Player Control Buttons */
+        .player-control-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: background 0.2s;
+        }
+
+        .player-control-btn:active {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Touch Device Enhancements */
+        @media (hover: none) and (pointer: coarse) {
+            /* Always show overlay on touch devices */
+            .media-card-overlay {
+                opacity: 1 !important;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            }
+
+            .media-card:hover .media-card-overlay {
+                opacity: 1;
+            }
+
+            /* Touch feedback for interactions */
+            .media-card:active {
+                transform: scale(0.95);
+            }
+
+            .btn:active, button:active {
+                transform: scale(0.98);
+                opacity: 0.9;
+            }
+
+            .playlist-item-row:active {
+                background: rgba(30, 136, 229, 0.1);
+            }
+        }
+
+        /* Playlist drag placeholder */
+        .playlist-item-placeholder {
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        /* ============ LOADING STATES & PERFORMANCE ============ */
+
+        /* Skeleton loading states */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a2e 25%, #252540 50%, #1a1a2e 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-card {
+            width: 100%;
+            aspect-ratio: 2/3;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-text {
+            height: 16px;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+
+        .skeleton-text.short {
+            width: 60%;
+        }
+
+        .skeleton-header {
+            height: 32px;
+            width: 40%;
+            margin-bottom: 20px;
+        }
+
+        /* Lazy loading images */
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.3s;
+            background: #1a1a2e;
+        }
+
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+
+        .lazy-image.error {
+            opacity: 0.5;
+        }
+
+        /* Button loading state */
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+
+        /* Offline indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #c62828;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+            z-index: 3000;
+            font-size: 0.9rem;
+        }
+
+        .offline-indicator.show {
+            transform: translateY(0);
+        }
+
+        /* Aspect ratio containers for images (reduce layout shift) */
+        .media-poster-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 150%; /* 2:3 aspect ratio */
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .media-poster-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Performance optimizations - will-change for animated elements */
+        .modal-overlay.active .modal {
+            will-change: transform, opacity;
+        }
+
+        .drawer.active .drawer-content {
+            will-change: transform;
+        }
+
+        .media-card:hover {
+            will-change: transform;
+        }
+
+        /* Reset will-change after animation */
+        .modal-overlay:not(.active) .modal,
+        .drawer:not(.active) .drawer-content,
+        .media-card:not(:hover):not(:active) {
+            will-change: auto;
+        }
     </style>
 </head>
 <body>
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offline-indicator">
+        <span>⚠️</span> No connection
+    </div>
+
+    <!-- Pull to Refresh Indicator -->
+    <div class="pull-refresh-indicator" id="pull-refresh-indicator">
+        <div class="pull-refresh-spinner"></div>
+        <div class="pull-refresh-text">Pull to refresh</div>
+    </div>
+
     <!-- Auth Section -->
     <div id="auth-section">
         <h1>Media Server</h1>
@@ -1296,6 +2285,7 @@
             document.getElementById('auth-section').classList.add('hidden');
             document.getElementById('main-section').classList.remove('hidden');
             document.getElementById('current-user').textContent = currentUser.username;
+            initPullToRefresh();
             loadData();
         }
 
@@ -1381,6 +2371,9 @@
                         </div>
                     `;
                 }).join('');
+
+                // Initialize lazy loading for new images
+                observeNewImages();
             } catch (err) {
                 console.error('Failed to load continue watching:', err);
                 document.getElementById('continue-watching-section').style.display = 'none';
@@ -1400,6 +2393,9 @@
                 }
 
                 grid.innerHTML = items.map(m => renderMediaCard(m)).join('');
+
+                // Initialize lazy loading for new images
+                observeNewImages();
             } catch (err) {
                 console.error('Failed to load recent:', err);
             }
@@ -1457,6 +2453,9 @@
             empty.style.display = 'none';
             grid.innerHTML = moviesData.map(m => renderMediaCard(m)).join('');
             loadMore.style.display = moviesOffset < moviesTotal ? 'block' : 'none';
+
+            // Initialize lazy loading for new images
+            observeNewImages();
         }
 
         function loadMoreMovies() {
@@ -1520,6 +2519,9 @@
             empty.style.display = 'none';
             grid.innerHTML = showsData.map(show => renderShowCard(show)).join('');
             loadMore.style.display = showsOffset < showsTotal ? 'block' : 'none';
+
+            // Initialize lazy loading for new images
+            observeNewImages();
         }
 
         function renderShowCard(show) {
@@ -1533,7 +2535,7 @@
             return `
                 <div class="media-card" onclick="showTVShowDetail(${show.id})">
                     ${posterUrl
-                        ? `<img class="media-poster" src="${posterUrl}" alt="${escapeHtml(show.title)}" loading="lazy">`
+                        ? `<img class="media-poster lazy-image" data-src="${posterUrl}" alt="${escapeHtml(show.title)}">`
                         : `<div class="media-poster" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #444;">📺</div>`
                     }
                     <div class="media-card-overlay">
@@ -1702,6 +2704,9 @@
             empty.style.display = 'none';
             grid.innerHTML = filtered.map(e => renderExtraCard(e)).join('');
             loadMore.style.display = extrasOffset < extrasTotal ? 'block' : 'none';
+
+            // Initialize lazy loading for new images
+            observeNewImages();
         }
 
         function renderExtraCard(extra) {
@@ -1753,7 +2758,7 @@
             return `
                 <div class="media-card" onclick="showMediaDetail(${media.id}, '${mediaType}')">
                     ${posterUrl
-                        ? `<img class="media-poster" src="${posterUrl}" alt="${escapeHtml(media.title)}" loading="lazy">`
+                        ? `<img class="media-poster lazy-image" data-src="${posterUrl}" alt="${escapeHtml(media.title)}">`
                         : `<div class="media-poster" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #444;">${mediaType === 'tvshow' ? '📺' : '🎬'}</div>`
                     }
                     <div class="media-card-overlay">
@@ -2241,6 +3246,13 @@
                 } else {
                     showPlaybackError('Video format not supported');
                 }
+
+            // Initialize video gestures and controls
+            setTimeout(() => {
+                initVideoGestures();
+                addPlayerControls();
+                autoHideControls();
+            }, 100);
             };
         }
 
@@ -2451,7 +3463,15 @@
         let editingPlaylistId = null;
         let addToPlaylistMediaId = null;
         let addToPlaylistMediaType = null;
-        let draggedItem = null;
+
+        // Touch-friendly drag and drop variables
+        let draggedElement = null;
+        let draggedIndex = null;
+        let placeholder = null;
+        let isDragging = false;
+        let startY = 0;
+        let startX = 0;
+        let longPressTimer = null;
 
         // Playlist playback state
         let playlistQueue = [];
@@ -2582,12 +3602,9 @@
             }
 
             list.innerHTML = currentPlaylistItems.map((item, index) => `
-                <div class="playlist-item-row" draggable="true" data-index="${index}" data-id="${item.id}"
-                     ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
-                     ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)"
-                     ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
+                <div class="playlist-item-row" data-index="${index}" data-id="${item.id}">
                     <span class="drag-handle">&#9776;</span>
-                    ${item.poster_path ? `<img src="https://image.tmdb.org/t/p/w92${item.poster_path}" class="playlist-item-poster" alt="">` : '<div class="playlist-item-poster"></div>'}
+                    ${item.poster_path ? `<img data-src="https://image.tmdb.org/t/p/w92${item.poster_path}" class="playlist-item-poster lazy-image" alt="">` : '<div class="playlist-item-poster"></div>'}
                     <div class="playlist-item-info" onclick="playPlaylistItem(${index})">
                         <div class="playlist-item-title">${escapeHtml(item.title)}</div>
                         <div class="playlist-item-meta">${item.year || ''} ${item.resolution || ''}</div>
@@ -2596,6 +3613,12 @@
                     <button class="btn-danger btn-sm" onclick="removeFromPlaylist(${item.id}, ${item.media_id}, '${item.media_type}')">Remove</button>
                 </div>
             `).join('');
+
+            // Initialize touch-friendly reordering
+            initPlaylistReordering();
+
+            // Initialize lazy loading for new images
+            observeNewImages();
         }
 
         function editCurrentPlaylist() {
@@ -2620,51 +3643,179 @@
             }
         }
 
-        // Drag and Drop
+        // Touch-friendly drag and drop for playlist reordering
+        function initPlaylistReordering() {
+            const container = document.querySelector('#playlist-items-list');
+            if (!container) return;
+
+            container.querySelectorAll('.playlist-item-row').forEach((item, index) => {
+                item.setAttribute('data-index', index);
+
+                // Mouse events
+                item.addEventListener('mousedown', handleDragStart);
+
+                // Touch events
+                item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            });
+
+            // Global event listeners (remove old ones first)
+            document.removeEventListener('mousemove', handleDragMove);
+            document.removeEventListener('mouseup', handleDragEnd);
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
+
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
+            document.addEventListener('touchend', handleTouchEnd);
+        }
+
         function handleDragStart(e) {
-            draggedItem = e.target;
-            e.target.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
+            if (e.target.closest('.playlist-item-actions') || e.target.closest('button')) return; // Don't drag when clicking buttons
+
+            draggedElement = e.currentTarget;
+            draggedIndex = parseInt(draggedElement.getAttribute('data-index'));
+            isDragging = true;
+            startY = e.clientY;
+
+            draggedElement.style.opacity = '0.5';
+            draggedElement.style.cursor = 'grabbing';
+
+            createPlaceholder();
         }
 
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
+        function handleTouchStart(e) {
+            if (e.target.closest('.playlist-item-actions') || e.target.closest('button')) return;
+
+            const touch = e.touches[0];
+            const element = e.currentTarget;
+            startY = touch.clientY;
+            startX = touch.clientX;
+
+            // Long press to activate drag
+            longPressTimer = setTimeout(() => {
+                if (element && Math.abs(touch.clientY - startY) < 10) {
+                    draggedElement = element;
+                    draggedIndex = parseInt(draggedElement.getAttribute('data-index'));
+                    isDragging = true;
+                    draggedElement.style.opacity = '0.5';
+                    createPlaceholder();
+
+                    // Haptic feedback if available
+                    if (navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
+                }
+            }, 500);
         }
 
-        function handleDragEnter(e) {
+        function createPlaceholder() {
+            placeholder = document.createElement('div');
+            placeholder.className = 'playlist-item-placeholder';
+            placeholder.style.height = draggedElement.offsetHeight + 'px';
+            placeholder.style.background = 'rgba(30, 136, 229, 0.2)';
+            placeholder.style.border = '2px dashed #1e88e5';
+            placeholder.style.borderRadius = '8px';
+            placeholder.style.margin = '8px 0';
+
+            draggedElement.parentNode.insertBefore(placeholder, draggedElement);
+        }
+
+        function handleDragMove(e) {
+            if (!isDragging) return;
             e.preventDefault();
-            const row = e.target.closest('.playlist-item-row');
-            if (row && row !== draggedItem) {
-                row.classList.add('drag-over');
+
+            const container = document.querySelector('#playlist-items-list');
+            const afterElement = getDragAfterElement(container, e.clientY);
+
+            if (afterElement == null) {
+                container.appendChild(placeholder);
+            } else {
+                container.insertBefore(placeholder, afterElement);
             }
         }
 
-        function handleDragLeave(e) {
-            const row = e.target.closest('.playlist-item-row');
-            if (row) {
-                row.classList.remove('drag-over');
-            }
-        }
-
-        function handleDrop(e) {
+        function handleTouchMove(e) {
+            if (!isDragging) return;
             e.preventDefault();
-            const row = e.target.closest('.playlist-item-row');
-            if (row && draggedItem && row !== draggedItem) {
-                const fromIndex = parseInt(draggedItem.dataset.index);
-                const toIndex = parseInt(row.dataset.index);
-                reorderPlaylistItems(fromIndex, toIndex);
+
+            // Clear long press timer if moving
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                longPressTimer = null;
             }
-            if (row) row.classList.remove('drag-over');
+
+            const touch = e.touches[0];
+            const container = document.querySelector('#playlist-items-list');
+            const afterElement = getDragAfterElement(container, touch.clientY);
+
+            if (afterElement == null) {
+                container.appendChild(placeholder);
+            } else {
+                container.insertBefore(placeholder, afterElement);
+            }
         }
 
         function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
-            document.querySelectorAll('.playlist-item-row').forEach(r => r.classList.remove('drag-over'));
-            draggedItem = null;
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                longPressTimer = null;
+            }
+
+            if (!isDragging) return;
+
+            finishDrag();
         }
 
-        async function reorderPlaylistItems(fromIndex, toIndex) {
+        function handleTouchEnd(e) {
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                longPressTimer = null;
+            }
+
+            if (!isDragging) return;
+
+            finishDrag();
+        }
+
+        function finishDrag() {
+            if (!draggedElement || !placeholder) return;
+
+            // Insert dragged element at placeholder position
+            placeholder.parentNode.insertBefore(draggedElement, placeholder);
+            placeholder.remove();
+
+            draggedElement.style.opacity = '';
+            draggedElement.style.cursor = '';
+
+            // Update order in backend
+            const newIndex = Array.from(draggedElement.parentNode.children).indexOf(draggedElement);
+            if (newIndex !== draggedIndex) {
+                reorderPlaylistItemsToPosition(draggedIndex, newIndex);
+            }
+
+            draggedElement = null;
+            placeholder = null;
+            isDragging = false;
+            draggedIndex = null;
+        }
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.playlist-item-row:not([style*="opacity: 0.5"])')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        async function reorderPlaylistItemsToPosition(fromIndex, toIndex) {
             if (!currentPlaylist) return;
 
             // Reorder locally
@@ -2947,6 +4098,275 @@
         }
 
         document.getElementById('section-form').addEventListener('submit', async (e) => {
+
+        // ============ PULL TO REFRESH ============
+        let pullStartY = 0;
+        let pullCurrentY = 0;
+        let isPulling = false;
+        let isRefreshing = false;
+
+        function initPullToRefresh() {
+            const mainSection = document.getElementById('main-section');
+            const indicator = document.getElementById('pull-refresh-indicator');
+
+            if (!mainSection || !indicator) return;
+
+            mainSection.addEventListener('touchstart', (e) => {
+                if (window.scrollY === 0 && !isRefreshing) {
+                    pullStartY = e.touches[0].pageY;
+                    isPulling = true;
+                }
+            }, { passive: true });
+
+            mainSection.addEventListener('touchmove', (e) => {
+                if (!isPulling) return;
+
+                pullCurrentY = e.touches[0].pageY;
+                const pullDistance = pullCurrentY - pullStartY;
+
+                if (pullDistance > 0 && pullDistance < 150) {
+                    indicator.classList.add('pulling');
+                    indicator.style.top = `${Math.min(pullDistance - 60, 20)}px`;
+                    indicator.querySelector('.pull-refresh-text').textContent =
+                        pullDistance > 80 ? 'Release to refresh' : 'Pull to refresh';
+                }
+            }, { passive: true });
+
+            mainSection.addEventListener('touchend', () => {
+                if (!isPulling) return;
+
+                const pullDistance = pullCurrentY - pullStartY;
+
+                if (pullDistance > 80 && !isRefreshing) {
+                    triggerRefresh();
+                } else {
+                    indicator.classList.remove('pulling');
+                    indicator.style.top = '';
+                }
+
+                isPulling = false;
+                pullStartY = 0;
+                pullCurrentY = 0;
+            }, { passive: true });
+        }
+
+        function triggerRefresh() {
+            const indicator = document.getElementById('pull-refresh-indicator');
+            isRefreshing = true;
+            indicator.classList.remove('pulling');
+            indicator.classList.add('refreshing');
+            indicator.querySelector('.pull-refresh-text').textContent = 'Refreshing...';
+
+            // Refresh current view
+            const currentView = document.querySelector('.view.active');
+            if (!currentView) return;
+
+            setTimeout(() => {
+                if (currentView.id === 'home-view') loadHome();
+                else if (currentView.id === 'movies-view') loadMovies(true);
+                else if (currentView.id === 'shows-view') loadShows(true);
+                else if (currentView.id === 'extras-view') loadExtras(true);
+
+                // Reset indicator
+                setTimeout(() => {
+                    indicator.classList.remove('refreshing');
+                    indicator.style.top = '';
+                    isRefreshing = false;
+                }, 500);
+            }, 1000);
+        }
+
+        // ============ VIDEO PLAYER GESTURES ============
+        let skipIndicatorTimeout;
+
+        function initVideoGestures() {
+            const playerVideo = document.getElementById('player-video');
+            if (!playerVideo) return;
+
+            let lastTap = 0;
+            let tapTimeout;
+
+            // Double tap to skip
+            playerVideo.addEventListener('touchend', (e) => {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+
+                clearTimeout(tapTimeout);
+
+                if (tapLength < 300 && tapLength > 0) {
+                    e.preventDefault();
+
+                    const rect = playerVideo.getBoundingClientRect();
+                    const x = e.changedTouches[0].clientX - rect.left;
+                    const width = rect.width;
+
+                    if (x < width / 2) {
+                        // Double tap left - rewind 10s
+                        playerVideo.currentTime = Math.max(0, playerVideo.currentTime - 10);
+                        showSkipIndicator('← 10s');
+                    } else {
+                        // Double tap right - forward 10s
+                        playerVideo.currentTime = Math.min(playerVideo.duration, playerVideo.currentTime + 10);
+                        showSkipIndicator('10s →');
+                    }
+                } else {
+                    // Single tap - toggle controls
+                    tapTimeout = setTimeout(() => {
+                        togglePlayerControls();
+                    }, 300);
+                }
+
+                lastTap = currentTime;
+            });
+
+            // Volume gesture (swipe up/down on right side)
+            let gestureStartY = 0;
+            let gestureStartValue = 0;
+
+            playerVideo.addEventListener('touchstart', (e) => {
+                gestureStartY = e.touches[0].clientY;
+                gestureStartValue = playerVideo.volume;
+            }, { passive: true });
+
+            playerVideo.addEventListener('touchmove', (e) => {
+                const rect = playerVideo.getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left;
+                const y = e.touches[0].clientY;
+                const deltaY = gestureStartY - y;
+
+                // Right side - volume control
+                if (x > rect.width * 0.7) {
+                    const volumeChange = deltaY / rect.height;
+                    playerVideo.volume = Math.max(0, Math.min(1, gestureStartValue + volumeChange));
+                    showVolumeIndicator(Math.round(playerVideo.volume * 100));
+                }
+            }, { passive: true });
+        }
+
+        function showSkipIndicator(text) {
+            let indicator = document.getElementById('skip-indicator');
+
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'skip-indicator';
+                indicator.className = 'skip-indicator';
+                document.getElementById('player-modal').appendChild(indicator);
+            }
+
+            indicator.textContent = text;
+            indicator.style.opacity = '1';
+
+            clearTimeout(skipIndicatorTimeout);
+            skipIndicatorTimeout = setTimeout(() => {
+                indicator.style.opacity = '0';
+            }, 1000);
+        }
+
+        function showVolumeIndicator(volume) {
+            let indicator = document.getElementById('volume-indicator');
+
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'volume-indicator';
+                indicator.className = 'volume-indicator';
+                document.getElementById('player-modal').appendChild(indicator);
+            }
+
+            indicator.innerHTML = `🔊 ${volume}%`;
+            indicator.style.opacity = '1';
+
+            clearTimeout(skipIndicatorTimeout);
+            skipIndicatorTimeout = setTimeout(() => {
+                indicator.style.opacity = '0';
+            }, 800);
+        }
+
+        let playerControlsTimeout;
+        let playerControlsVisible = true;
+
+        function togglePlayerControls() {
+            const header = document.querySelector('.player-header');
+            const upNext = document.querySelector('.up-next');
+
+            playerControlsVisible = !playerControlsVisible;
+
+            if (playerControlsVisible) {
+                header.style.opacity = '1';
+                if (upNext) upNext.style.opacity = '1';
+                autoHideControls();
+            } else {
+                header.style.opacity = '0';
+                if (upNext) upNext.style.opacity = '0';
+            }
+        }
+
+        function autoHideControls() {
+            clearTimeout(playerControlsTimeout);
+            playerControlsTimeout = setTimeout(() => {
+                const header = document.querySelector('.player-header');
+                const upNext = document.querySelector('.up-next');
+                header.style.opacity = '0';
+                if (upNext) upNext.style.opacity = '0';
+                playerControlsVisible = false;
+            }, 3000);
+        }
+
+        // ============ FULLSCREEN AND PICTURE-IN-PICTURE ============
+        function toggleFullscreen() {
+            const playerModal = document.getElementById('player-modal');
+
+            if (!document.fullscreenElement) {
+                if (playerModal.requestFullscreen) {
+                    playerModal.requestFullscreen();
+                } else if (playerModal.webkitRequestFullscreen) {
+                    playerModal.webkitRequestFullscreen();
+                } else if (playerModal.msRequestFullscreen) {
+                    playerModal.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function togglePiP() {
+            const video = document.getElementById('player-video');
+
+            if (!document.pictureInPictureElement) {
+                video.requestPictureInPicture()
+                    .catch(error => {
+                        console.log('PiP not supported:', error);
+                    });
+            } else {
+                document.exitPictureInPicture();
+            }
+        }
+
+        function addPlayerControls() {
+            const playerHeader = document.querySelector('.player-header');
+            const closeBtn = playerHeader.querySelector('.player-close');
+
+            // Check if controls already added
+            if (playerHeader.querySelector('.player-control-btn')) return;
+
+            // Fullscreen button
+            const fullscreenBtn = document.createElement('button');
+            fullscreenBtn.className = 'player-control-btn';
+            fullscreenBtn.innerHTML = '⛶';
+            fullscreenBtn.title = 'Fullscreen';
+            fullscreenBtn.onclick = toggleFullscreen;
+
+            // PiP button
+            const pipBtn = document.createElement('button');
+            pipBtn.className = 'player-control-btn';
+            pipBtn.innerHTML = '⧉';
+            pipBtn.title = 'Picture-in-Picture';
+            pipBtn.onclick = togglePiP;
+
+            playerHeader.insertBefore(pipBtn, closeBtn);
+            playerHeader.insertBefore(fullscreenBtn, closeBtn);
+        }
             e.preventDefault();
 
             const errorEl = document.getElementById('section-form-error');
@@ -3011,7 +4431,313 @@
             closeRuleModal();
         });
 
+        // Bottom Navigation Functions
+        function updateBottomNav(element) {
+            const items = document.querySelectorAll('.bottom-nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        function openBrowseDrawer() {
+            document.getElementById('browse-drawer').classList.add('active');
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openMoreDrawer() {
+            document.getElementById('more-drawer').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer(drawerId) {
+            document.getElementById(drawerId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function focusSearch() {
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.focus();
+                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            updateBottomNav(document.querySelector('.bottom-nav-item[onclick*="focusSearch"]'));
+        }
+
+        // Close drawer on swipe down (bonus feature)
+        let startY = 0;
+        let currentY = 0;
+
+        document.querySelectorAll('.drawer-content').forEach(drawerContent => {
+            drawerContent.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].pageY;
+            }, { passive: true });
+
+            drawerContent.addEventListener('touchmove', (e) => {
+                currentY = e.touches[0].pageY;
+                const diff = currentY - startY;
+
+                if (diff > 0 && drawerContent.scrollTop === 0) {
+                    drawerContent.style.transform = `translateY(${diff}px)`;
+                }
+            }, { passive: true });
+
+            drawerContent.addEventListener('touchend', () => {
+                const diff = currentY - startY;
+
+                if (diff > 100) {
+                    const drawer = drawerContent.closest('.drawer');
+                    closeDrawer(drawer.id);
+                }
+
+                drawerContent.style.transform = '';
+            }, { passive: true });
+        });
+
+        // Swipe to dismiss modals
+        function initModalSwipeGestures() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                let modalStartY = 0;
+                let modalCurrentY = 0;
+                let modalIsDragging = false;
+
+                modal.addEventListener('touchstart', (e) => {
+                    // Only allow swipe from top area
+                    const rect = modal.getBoundingClientRect();
+                    if (e.touches[0].clientY - rect.top < 50) {
+                        modalStartY = e.touches[0].pageY;
+                        modalIsDragging = true;
+                    }
+                }, { passive: true });
+
+                modal.addEventListener('touchmove', (e) => {
+                    if (!modalIsDragging) return;
+
+                    modalCurrentY = e.touches[0].pageY;
+                    const diff = modalCurrentY - modalStartY;
+
+                    if (diff > 0) {
+                        modal.style.transform = `translateY(${diff}px)`;
+                        modal.style.opacity = 1 - (diff / 300);
+                    }
+                }, { passive: true });
+
+                modal.addEventListener('touchend', () => {
+                    if (!modalIsDragging) return;
+
+                    const diff = modalCurrentY - modalStartY;
+
+                    if (diff > 100) {
+                        // Close modal
+                        const overlay = modal.closest('.modal-overlay');
+                        if (overlay) {
+                            overlay.classList.remove('active');
+                        }
+                    }
+
+                    // Reset
+                    modal.style.transform = '';
+                    modal.style.opacity = '';
+                    modalIsDragging = false;
+                }, { passive: true });
+            });
+        }
+
+        // Initialize when modals are shown
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class' && overlay.classList.contains('active')) {
+                        initModalSwipeGestures();
+                    }
+                });
+            });
+
+            observer.observe(overlay, { attributes: true });
+        });
+
+        // ============ PERFORMANCE OPTIMIZATIONS ============
+
+        // Lazy Loading Images with Intersection Observer
+        let imageObserver;
+
+        function initLazyLoading() {
+            const imageObserverConfig = {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            };
+
+            imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.getAttribute('data-src');
+
+                        if (src) {
+                            // Create a temporary image to load
+                            const tempImg = new Image();
+                            tempImg.onload = () => {
+                                img.src = src;
+                                img.classList.add('loaded');
+                                img.classList.remove('lazy-image');
+                            };
+                            tempImg.onerror = () => {
+                                img.src = '/placeholder.png'; // Fallback image
+                                img.classList.add('error');
+                            };
+                            tempImg.src = src;
+
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, imageObserverConfig);
+
+            // Observe all lazy images
+            document.querySelectorAll('.lazy-image').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Call after rendering media grids
+        function observeNewImages() {
+            if (imageObserver) {
+                document.querySelectorAll('.lazy-image').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+        }
+
+        // Skeleton Screen Functions
+        function createSkeletonGrid(count = 12) {
+            const skeletons = [];
+            for (let i = 0; i < count; i++) {
+                skeletons.push(`
+                    <div class="skeleton-card skeleton"></div>
+                `);
+            }
+            return `
+                <div class="skeleton-header skeleton"></div>
+                <div class="media-grid">
+                    ${skeletons.join('')}
+                </div>
+            `;
+        }
+
+        // Use when loading
+        function showLoadingState(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = createSkeletonGrid();
+            }
+        }
+
+        // Button Loading States
+        function setButtonLoading(button, loading) {
+            if (loading) {
+                button.classList.add('btn-loading');
+                button.disabled = true;
+            } else {
+                button.classList.remove('btn-loading');
+                button.disabled = false;
+            }
+        }
+
+        // Debounce utility function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Connection Status Monitoring
+        window.addEventListener('online', () => {
+            document.getElementById('offline-indicator').classList.remove('show');
+            showToast('Connection restored', 'success');
+        });
+
+        window.addEventListener('offline', () => {
+            document.getElementById('offline-indicator').classList.add('show');
+        });
+
+        // Initialize lazy loading on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initLazyLoading();
+        });
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <a href="#" class="bottom-nav-item active" data-view="home" onclick="showView('home'); updateBottomNav(this); return false;">
+            <span class="bottom-nav-icon">🏠</span>
+            <span class="bottom-nav-label">Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="openBrowseDrawer(); return false;">
+            <span class="bottom-nav-icon">🎬</span>
+            <span class="bottom-nav-label">Browse</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="focusSearch(); updateBottomNav(this); return false;">
+            <span class="bottom-nav-icon">🔍</span>
+            <span class="bottom-nav-label">Search</span>
+        </a>
+        <a href="#" class="bottom-nav-item" data-view="playlists" onclick="showView('playlists'); updateBottomNav(this); return false;">
+            <span class="bottom-nav-icon">📋</span>
+            <span class="bottom-nav-label">Playlists</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="openMoreDrawer(); return false;">
+            <span class="bottom-nav-icon">⋯</span>
+            <span class="bottom-nav-label">More</span>
+        </a>
+    </nav>
+
+    <!-- Browse Drawer -->
+    <div class="drawer" id="browse-drawer" onclick="if(event.target === this) closeDrawer('browse-drawer');">
+        <div class="drawer-content">
+            <div class="drawer-handle"></div>
+            <h3 style="margin-bottom: 20px;">Browse</h3>
+            <div class="drawer-item" onclick="showView('movies'); closeDrawer('browse-drawer');">
+                <span class="drawer-icon">🎬</span>
+                <span>Movies</span>
+            </div>
+            <div class="drawer-item" onclick="showView('shows'); closeDrawer('browse-drawer');">
+                <span class="drawer-icon">📺</span>
+                <span>TV Shows</span>
+            </div>
+            <div class="drawer-item" onclick="showView('extras'); closeDrawer('browse-drawer');">
+                <span class="drawer-icon">🎞️</span>
+                <span>Extras</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- More Drawer -->
+    <div class="drawer" id="more-drawer" onclick="if(event.target === this) closeDrawer('more-drawer');">
+        <div class="drawer-content">
+            <div class="drawer-handle"></div>
+            <h3 style="margin-bottom: 20px;">More</h3>
+            <div class="drawer-item" onclick="showView('sections'); closeDrawer('more-drawer');">
+                <span class="drawer-icon">📁</span>
+                <span>Sections</span>
+            </div>
+            <div class="drawer-item" onclick="showView('admin'); closeDrawer('more-drawer');">
+                <span class="drawer-icon">⚙️</span>
+                <span>Admin</span>
+            </div>
+            <div class="drawer-item" onclick="logout(); closeDrawer('more-drawer');">
+                <span class="drawer-icon">🚪</span>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
