@@ -26,6 +26,9 @@ class ChannelPlayerViewModel: ObservableObject {
 
         print("[ChannelPlayer] Loading channel: \(channelId)")
 
+        // Ensure we're authenticated before trying to play
+        await AuthService.shared.ensureAuthenticated()
+
         do {
             let response = try await api.getChannelNowPlaying(channelId: channelId)
             channel = response.channel
@@ -37,23 +40,24 @@ class ChannelPlayerViewModel: ObservableObject {
             print("[ChannelPlayer] Now playing: \(response.nowPlaying?.title ?? "nil")")
             print("[ChannelPlayer] Elapsed: \(response.elapsed)s")
             print("[ChannelPlayer] Up next count: \(response.upNext.count)")
+            print("[ChannelPlayer] Stream URL from server: \(response.streamUrl ?? "nil")")
 
             // Setup player with the current item
             if let nowPlaying = response.nowPlaying {
-                setupPlayer(for: nowPlaying, seekTo: response.elapsed)
+                setupPlayer(for: nowPlaying, seekTo: response.elapsed, serverStreamUrl: response.streamUrl)
             } else {
                 errorMessage = "No content currently playing on this channel"
                 print("[ChannelPlayer] ERROR: No nowPlaying item in response")
             }
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = "Load failed: \(error.localizedDescription) [server: \(AppState.shared.serverURL)]"
             print("[ChannelPlayer] ERROR loading channel: \(error)")
         }
 
         isLoading = false
     }
 
-    private func setupPlayer(for item: ChannelScheduleItem, seekTo elapsed: Int) {
+    private func setupPlayer(for item: ChannelScheduleItem, seekTo elapsed: Int, serverStreamUrl: String? = nil) {
         // Clean up existing player
         cleanup()
 
@@ -62,9 +66,18 @@ class ChannelPlayerViewModel: ObservableObject {
 
         print("[ChannelPlayer] Setting up player for: \(item.title) (mediaId: \(item.mediaId), type: \(item.mediaType))")
 
-        // Get stream URL for the media
+        // Get stream URL - prefer server-provided URL, fall back to manual construction
         let streamURL: URL?
-        if let directURL = api.getDirectPlayURL(mediaId: media.id, mediaType: media.type) {
+        let baseURL = AppState.shared.serverURL
+        let token = AuthService.shared.token
+
+        if let serverPath = serverStreamUrl, let token = token {
+            // Use server-provided stream URL (includes correct type and start params)
+            let separator = serverPath.contains("?") ? "&" : "?"
+            let fullURL = "\(baseURL)\(serverPath)\(separator)token=\(token)"
+            streamURL = URL(string: fullURL)
+            print("[ChannelPlayer] Using server stream URL: \(fullURL)")
+        } else if let directURL = api.getDirectPlayURL(mediaId: media.id, mediaType: media.type) {
             streamURL = directURL
             print("[ChannelPlayer] Using direct play URL: \(directURL)")
         } else if let hlsURL = api.getStreamURL(mediaId: media.id, mediaType: media.type) {
@@ -72,13 +85,16 @@ class ChannelPlayerViewModel: ObservableObject {
             print("[ChannelPlayer] Using HLS URL: \(hlsURL)")
         } else {
             streamURL = nil
+            print("[ChannelPlayer] ERROR: No stream URL available. baseURL=\(baseURL), token=\(token != nil ? "set" : "nil"), serverStreamUrl=\(serverStreamUrl ?? "nil")")
         }
 
         guard let url = streamURL else {
-            errorMessage = "Failed to get stream URL"
-            print("[ChannelPlayer] ERROR: Failed to get stream URL")
+            errorMessage = "Failed to get stream URL (token: \(token != nil ? "yes" : "NO"), server: \(baseURL))"
+            print("[ChannelPlayer] ERROR: Failed to get stream URL. token=\(token != nil), baseURL=\(baseURL), serverStreamUrl=\(serverStreamUrl ?? "nil")")
             return
         }
+
+        print("[ChannelPlayer] Playing: \(url)")
 
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
@@ -154,7 +170,7 @@ class ChannelPlayerViewModel: ObservableObject {
                 elapsed = response.elapsed
 
                 if let newItem = response.nowPlaying {
-                    setupPlayer(for: newItem, seekTo: response.elapsed)
+                    setupPlayer(for: newItem, seekTo: response.elapsed, serverStreamUrl: response.streamUrl)
                 }
             } else {
                 // Just update up next
