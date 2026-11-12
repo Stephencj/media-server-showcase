@@ -18,7 +18,7 @@
 
 set -euo pipefail
 
-HOST="${DEPLOY_HOST:-stephencjuliano@192.168.1.20}"
+HOST="${DEPLOY_HOST:-stephencjuliano@media-server.local}"
 DIR="${DEPLOY_DIR:-/home/stephencjuliano/media-server}"
 REF="refs/deploy/incoming"
 

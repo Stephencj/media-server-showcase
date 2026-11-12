@@ -11,7 +11,6 @@ import Foundation
 enum ServerLocator {
     /// Where the server answers on the home network.
     static let localCandidates = [
-        "http://192.168.1.20:8080",
         "http://media-server.local:8080",
     ]
 
